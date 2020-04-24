@@ -544,6 +544,13 @@ if(TARGET Qt5::windeployqt)
 	)
 endif()
 
+# Doxygen.
+    add_custom_command(TARGET GenerateDocumentation
+        POST_BUILD
+		COMMENT "Adding index.html to Build directory"
+        COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/Doxymentation/html/index.html								${CMAKE_BINARY_DIR}/index.html
+	)
+
 #------------------------------------------------------------------------------
 # Calling copy functions to provide custom targets.
 # Add the custom targets to copy the required binaries.
@@ -606,6 +613,8 @@ add_custom_target(QSimpleUpdaterCopyBinaries
 #  COMMAND	${CMAKE_COMMAND} -E copy ${ZLIB_ROOT}/build/Release/zlib.dll          ${CMAKE_BINARY_DIR}/Release
 #  COMMAND	${CMAKE_COMMAND} -E copy ${ZLIB_ROOT}/build/RelWithDebInfo/zlib.dll   ${CMAKE_BINARY_DIR}/RelWithDebInfo
 #)
+
+
 
 #-------------------------------------------------------------------------------------
 # Add carve thirdparty library without corrupting our own install target.
